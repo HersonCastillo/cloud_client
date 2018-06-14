@@ -1,13 +1,13 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="mat-elevation-z2">
     <mat-toolbar-row>
         <span class="material-icons">cloud</span>
         <label style="margin-left: 10px;">aiCloud</label>
         <span class="spacer"></span>
-        <button mat-button style="margin-right: 5px;">
+        <button mat-button style="margin-right: 5px;" (click)="addFolder()">
             <span class="material-icons">add</span>&ensp;
             Crear una carpeta
         </button>
-        <button mat-button>
+        <button mat-button (click)="addFile()">
             <span class="material-icons">attach_file</span>&ensp;
             Subir un archivo
         </button>

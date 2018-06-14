@@ -10,6 +10,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { ErrorComponent } from './error/error.component';
 import { HomeComponent } from './home/home.component';
+import { SimpleComponent } from './modal/simple/simple.component';
+import { ConfirmarComponent } from './modal/confirmar/confirmar.component';
 
 const appRoutes: Routes = [
     { path: 'login',  component: LoginComponent },
@@ -23,7 +25,9 @@ const appRoutes: Routes = [
         AppComponent,
         LoginComponent,
         ErrorComponent,
-        HomeComponent
+        HomeComponent,
+        SimpleComponent,
+        ConfirmarComponent
     ],
     imports: [
         BrowserModule,
@@ -35,6 +39,10 @@ const appRoutes: Routes = [
         ReactiveFormsModule
     ],
     providers: [],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [
+        SimpleComponent,
+        ConfirmarComponent
+    ]
 })
 export class AppModule { }
