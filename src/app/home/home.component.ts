@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { SimpleComponent, ConfirmarComponent } from '../modal/modal';
+import { SimpleComponent, ConfirmarComponent, FolderComponent } from '../modal/modal';
 import { Router } from '@angular/router';
 @Component({
     selector: 'app-home',
@@ -34,7 +34,9 @@ export class HomeComponent implements OnInit {
         this.dialog.open(ConfirmarComponent);
     }
     addFolder(): void{
-
+        FolderComponent._pathToCreate = this.path;
+        FolderComponent._close = () => this.dialog.closeAll();
+        this.dialog.open(FolderComponent);
     }
     addFile(): void {
         
@@ -46,5 +48,14 @@ export class HomeComponent implements OnInit {
             this.router.navigate(['login']);
             this.dialog.closeAll();
         });
+    }
+    raiz(): void{
+        this.path = "/";
+    }
+    compartidosYo(): void{
+        this.path = "/shared/card/";
+    }
+    compartidosOtros(): void{
+        this.path = "/shared/external/";
     }
 }

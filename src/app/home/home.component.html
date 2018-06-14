@@ -29,7 +29,7 @@
     <br>
     <div class="container-fluid">
         <mat-accordion>
-            <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel [expanded]="true" (opened)="raiz()">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         <span class="material-icons icon-label to-acc">folder</span>
@@ -42,7 +42,7 @@
 
                 <!--Here-->
             </mat-expansion-panel>
-            <mat-expansion-panel>
+            <mat-expansion-panel (opened)="compartidosOtros()">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         <span class="material-icons icon-label to-acc">insert_drive_file</span>
@@ -55,7 +55,7 @@
 
                 <!--Here-->
             </mat-expansion-panel>
-            <mat-expansion-panel>
+            <mat-expansion-panel (opened)="compartidosYo()">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         <span class="material-icons icon-label to-acc">folder_shared</span>

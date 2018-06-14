@@ -1,3 +1,23 @@
-<p>
-  folder works!
-</p>
+<div>
+    <h2 style="margin-right: 55px;">
+        <span class="material-icons back" (click)="close()">arrow_back</span>
+        Crear un nuevo folder
+    </h2>
+    <br>
+    <mat-form-field style="width: 100%;">
+        <input type="text" 
+        #carpeta 
+        matInput 
+        maxlength="30" 
+        autocomplete="off"
+        [(ngModel)]="carpetaName"
+        placeholder="Nombre de la carpeta">
+        <mat-hint align="start"><strong><code>{{dinCreate(pathToCreate, carpetaName)}}</code></strong></mat-hint>
+        <mat-hint align="end">{{carpeta.value.length}} / 30</mat-hint>
+        <span matSuffix class="material-icons">folder</span>
+    </mat-form-field>
+    <br><br>
+    <button style="flex: 1 1 auto;" mat-raised-button color="primary">
+        Crear carpeta
+    </button>
+</div>
