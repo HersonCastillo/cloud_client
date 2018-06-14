@@ -14,6 +14,13 @@ export class HomeComponent implements OnInit {
         private router: Router
     ){}
     ngOnInit(){}
+    private _path: string = "/";
+    public set path(val: string){
+        this._path = val;
+    }
+    public get path(): string{
+        return this._path;
+    }
     makeSnack(txt: string, t?: number): void{
         this.snack.open(txt, null, { duration: t | 1500 });
     }
@@ -33,7 +40,8 @@ export class HomeComponent implements OnInit {
         
     }
     logout(): void{
-        this.confirmModal('¡Un momento!', '¿Estás seguro de que quieres cerrar sesión ahora?', () => {
+        this.confirmModal('¡Un momento!', 
+        '¿Estás seguro de que quieres cerrar sesión ahora?', () => {
             localStorage.removeItem('token');
             this.router.navigate(['login']);
             this.dialog.closeAll();

@@ -1,5 +1,5 @@
 <mat-toolbar color="primary" class="mat-elevation-z2">
-    <mat-toolbar-row>
+    <mat-toolbar-row class="mat-elevation-z4">
         <span class="material-icons">cloud</span>
         <label style="margin-left: 10px;">aiCloud</label>
         <span class="spacer"></span>
@@ -11,9 +11,63 @@
             <span class="material-icons icon-label">attach_file</span>&ensp;
             Subir un archivo
         </button>
-        <button mat-button style="margin-right: 5px;" (click)="logout()">
+        <button mat-raised-button style="margin-right: 5px;" (click)="logout()">
             <span class="material-icons icon-label">close</span>
-            Salir
+            Cerrar sesión
         </button>
     </mat-toolbar-row>
+    <mat-toolbar-row>
+        <span class="material-icons" style="margin-right: 10px;">folder_open</span>
+        <span>
+            <code>
+                {{path}}
+            </code>
+        </span>
+    </mat-toolbar-row>
 </mat-toolbar>
+<div class="general-home">
+    <br>
+    <div class="container-fluid">
+        <mat-accordion>
+            <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <span class="material-icons icon-label to-acc">folder</span>
+                        Mis archivos y carpetas
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Mi contenido personal.
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <!--Here-->
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <span class="material-icons icon-label to-acc">insert_drive_file</span>
+                        Mis archivos y carpetas compartidos por otros a mi
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Lo que otras personas me han compartido.
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <!--Here-->
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <span class="material-icons icon-label to-acc">folder_shared</span>
+                        Mis archivos y carpetas que he compartido yo a otros
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        El contenido que he compartido a otras personas.
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <!--Here-->
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>
