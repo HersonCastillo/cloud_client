@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { SimpleComponent } from '../modal/modal';
+import { SimpleComponent, ConfirmarComponent } from '../modal/modal';
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
@@ -15,6 +15,11 @@ export class HomeComponent implements OnInit {
     simpleModal(title: string, message: string): void{
         SimpleComponent.run(title, message, () => this.dialog.closeAll());
         this.dialog.open(SimpleComponent);
+    }
+    confirmModal(title: string, message: string, fs: Function, fe?: Function): void{
+        if(!fe) ConfirmarComponent.run(title, message, fs, () => this.dialog.closeAll());
+        else ConfirmarComponent.run(title, message, fs, fe);
+        this.dialog.open(ConfirmarComponent);
     }
     addFolder(): void{
 
