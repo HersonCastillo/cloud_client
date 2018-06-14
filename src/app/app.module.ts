@@ -12,6 +12,8 @@ import { ErrorComponent } from './error/error.component';
 import { HomeComponent } from './home/home.component';
 import { SimpleComponent } from './modal/simple/simple.component';
 import { ConfirmarComponent } from './modal/confirmar/confirmar.component';
+import { FolderComponent } from './modal/folder/folder.component';
+import { FileComponent } from './modal/file/file.component';
 
 const appRoutes: Routes = [
     { path: 'login',  component: LoginComponent },
@@ -27,7 +29,9 @@ const appRoutes: Routes = [
         ErrorComponent,
         HomeComponent,
         SimpleComponent,
-        ConfirmarComponent
+        ConfirmarComponent,
+        FolderComponent,
+        FileComponent
     ],
     imports: [
         BrowserModule,
@@ -42,7 +46,9 @@ const appRoutes: Routes = [
     bootstrap: [AppComponent],
     entryComponents: [
         SimpleComponent,
-        ConfirmarComponent
+        ConfirmarComponent,
+        FileComponent,
+        FolderComponent
     ]
 })
 export class AppModule { }

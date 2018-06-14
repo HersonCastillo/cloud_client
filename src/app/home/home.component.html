@@ -4,12 +4,16 @@
         <label style="margin-left: 10px;">aiCloud</label>
         <span class="spacer"></span>
         <button mat-button style="margin-right: 5px;" (click)="addFolder()">
-            <span class="material-icons">add</span>&ensp;
+            <span class="material-icons icon-label">add</span>&ensp;
             Crear una carpeta
         </button>
-        <button mat-button (click)="addFile()">
-            <span class="material-icons">attach_file</span>&ensp;
+        <button mat-button style="margin-right: 5px;" (click)="addFile()">
+            <span class="material-icons icon-label">attach_file</span>&ensp;
             Subir un archivo
+        </button>
+        <button mat-button style="margin-right: 5px;" (click)="logout()">
+            <span class="material-icons icon-label">close</span>
+            Salir
         </button>
     </mat-toolbar-row>
 </mat-toolbar>
