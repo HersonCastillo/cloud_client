@@ -13,7 +13,18 @@ export class HomeComponent implements OnInit {
         private snack: MatSnackBar,
         private router: Router
     ){}
-    ngOnInit(){}
+    public userName: string = "aiCloud";
+    ngOnInit(){
+        if(localStorage.getItem('u_info')){
+            try{
+                let data: any = localStorage.getItem('u_info');
+                data = JSON.parse(atob(data));
+                this.userName = data.nombre + " " + data.apellido;
+            }catch(ex){
+                this.userName = "aiCloud";
+            }
+        }
+    }
     private _path: string = "/";
     public set path(val: string){
         this._path = val;

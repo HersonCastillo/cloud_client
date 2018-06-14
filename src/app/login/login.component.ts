@@ -38,8 +38,18 @@ export class LoginComponent implements OnInit {
             }).then(response => {
                 if(response.success){
                     localStorage.setItem('token', response._accesstoken_);
+                    this.loginProvider.validateToken().then(__token => {
+                        if(__token.success && __token.user){
+                            let userInfo = __token.user;
+                            userInfo = btoa(JSON.stringify(userInfo));
+                            localStorage.setItem('u_info', userInfo);
+                        } else this.makeSnack('La información del usuario está dañada.');
+                    }).catch(__err => {
+                        this.makeSnack('No se pudo obtener la información del usuario.', 2500);
+                    });
                     this.router.navigate(['home']);
-                } else this.makeSnack("No se recuperó la respuesta esperada.");
+                } else if(response.error) this.makeSnack(response.error, 2500);
+                else this.makeSnack("No se encontró la respuesta esperada.");
             }).catch(err => {
                 this.makeSnack('Ocurrió un error al obtener el usuario.', 3500);
                 console.error(err);
