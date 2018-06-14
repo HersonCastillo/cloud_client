@@ -26,6 +26,7 @@ import {
   MatExpansionModule
 } from '@angular/material';
 
+import { LayoutModule } from '@angular/cdk/layout';
 import { MatProgressBarModule } 
 from '@angular/material/progress-bar';
 
@@ -53,7 +54,8 @@ from '@angular/material/progress-bar';
     MatTableModule,
     MatPaginatorModule,
     MatSelectModule,
-    MatExpansionModule
+    MatExpansionModule,
+    LayoutModule
   ],
   exports: [
     MatButtonModule,
@@ -75,7 +77,8 @@ from '@angular/material/progress-bar';
     MatTableModule,
     MatPaginatorModule,
     MatSelectModule,
-    MatExpansionModule
+    MatExpansionModule,
+    LayoutModule
   ],
   declarations: []
 })
