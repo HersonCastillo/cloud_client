@@ -17,7 +17,7 @@
         </button>
     </mat-toolbar-row>
     <mat-toolbar-row>
-        <span class="material-icons" style="margin-right: 10px;">folder_open</span>
+        <span class="material-icons" style="margin-right: 10px; cursor: pointer;" (click)="raiz()">folder_open</span>
         <span>
             <code>
                 {{path}}
@@ -27,8 +27,53 @@
 </mat-toolbar>
 <mat-tab-group>
     <mat-tab label="Mis archivos y carpetas">
-        <div class="container-fluid">
-
+        <div class="container">
+            <br>
+            <table class="mat-table mat-elevation-z6">
+                <thead>
+                    <tr class="mat-header-row">
+                        <th class="mat-header-cell"> Tipo </th>
+                        <th class="mat-header-cell"> Nombre del archivo </th>
+                        <th class="mat-header-cell"> Acciones </th>
+                    </tr>
+                    </thead>
+                <tbody>
+                    <tr class="mat-row" *ngIf="path !== '/'">
+                        <td class="mat-cell" colspan="3">
+                            <span class="material-icons" 
+                            style="margin-left: 25px; cursor: pointer;" 
+                            (click)="backToNewRoute(path)">arrow_back</span>
+                        </td>
+                    </tr>
+                    <tr class="mat-row" *ngIf="dataSource.length === 0">
+                        <td class="mat-cell" colspan="3" style="text-align: center; padding-bottom: 30px;">
+                            Directorio vacío.
+                        </td>
+                    </tr>
+                    <tr class="mat-row" *ngFor="let element of dataSource">
+                        <td class="mat-cell" style="text-align: center;">
+                            <span class="material-icons">{{element.type}}</span>
+                        </td>
+                        <td class="mat-cell file-name" 
+                            style="cursor: pointer;" 
+                            (click)="sintantyc(element)"> 
+                            {{element.nombre}} 
+                        </td>
+                        <td class="mat-cell" style="text-align: center;">
+                            <button mat-mini-fab color="accent" class="l-right">
+                                <span class="material-icons">info</span>
+                            </button>
+                            <button mat-mini-fab color="primary" class="l-right">
+                                <span class="material-icons">cloud_download</span>
+                            </button>
+                            <button mat-mini-fab color="warn">
+                                <span class="material-icons">delete_forever</span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br><br>
         </div>
     </mat-tab>
     <mat-tab label="Archivos compartidos por otros">

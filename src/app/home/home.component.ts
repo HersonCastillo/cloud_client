@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
+import { NotificationsService } from 'angular2-notifications';
 import { 
     SimpleComponent, 
     ConfirmarComponent, 
@@ -7,6 +8,8 @@ import {
     FileComponent
 } from '../modal/modal';
 import { Router } from '@angular/router';
+import { FilesService } from '../services/files.service';
+import { isArray } from 'util';
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
@@ -16,9 +19,12 @@ export class HomeComponent implements OnInit {
     constructor(
         private dialog: MatDialog,
         private snack: MatSnackBar,
-        private router: Router
+        private router: Router,
+        private files: FilesService,
+        private notify: NotificationsService
     ){}
     public userName: string = "aiCloud";
+    public dataSource: Array<any> = [];
     ngOnInit(){
         if(localStorage.getItem('u_info')){
             try{
@@ -29,6 +35,7 @@ export class HomeComponent implements OnInit {
                 this.userName = "aiCloud";
             }
         }
+        this.showOf(this.path);
     }
     private _path: string = "/";
     public set path(val: string){
@@ -68,7 +75,52 @@ export class HomeComponent implements OnInit {
             this.dialog.closeAll();
         });
     }
-    raiz(): void{}
-    compartidosYo(): void{}
-    compartidosOtros(): void{}
+    raiz(): void{
+        this.path = "/";
+        this.showOf(this.path);
+    }
+    showOf(path: string): void{
+        this.files.show(path).then(response => {
+            if(response.data && isArray(response.data)){
+                let data: Array<any> = [];
+                let num: number = 0;
+                response.data.forEach(element => {
+                    let reg = new RegExp(/^[\d\D]{1,}[.][\d\D]{1,}$/gi);
+                    data.push({
+                        nombre: element,
+                        id: ++num,
+                        type: reg.exec(element) ? 'attach_file' : 'folder'
+                    });
+                });
+                this.dataSource = data;
+            }
+        }).catch(err => {
+            this.notify.error("¡Ups!", 'No se pueden obtener los datos.', {
+                clickToClose: true
+            });
+        });
+    }
+    backToNewRoute(path: string): void{
+        let route: string = path;
+        let nRoute: Array<any> = [], cRoute: Array<any> = [];
+        nRoute = route.split("/");
+        nRoute.forEach(el => {
+            if(el != "") cRoute.push(el);
+        });
+        cRoute.pop();
+        route = "/";
+        cRoute.forEach(el => {
+            route += el + "/";
+        });
+        this.path = route;
+        this.showOf(route);
+    }
+    sintantyc(object: any): void{
+        if(object.type === "folder"){
+            this.path += object.nombre + "/";
+            this.showOf(this.path);
+        } else if(object.type === "attach_file"){
+
+        } else this.makeSnack('Archivo dañado, datos desconocidos.');
+    }
 }

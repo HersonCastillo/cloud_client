@@ -21,4 +21,16 @@ export class FilesService {
             } else rj(null);
         });
     }
+    public show(path: string): Promise<any>{
+        return new Promise<any>((rs, rj) => {
+            if(localStorage.getItem('token')){
+                let token = localStorage.getItem('token');
+                token = token.split('.')[0];
+                this.http.post(this.globals.path + "/api/view/files", {
+                    token: token,
+                    path: path
+                }).subscribe(r => rs(r.json()), err => rj(err));
+            } else rj(null);
+        });
+    }
 }

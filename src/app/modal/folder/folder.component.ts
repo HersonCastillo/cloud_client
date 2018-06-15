@@ -28,18 +28,21 @@ export class FolderComponent implements OnInit {
     crear(): void{
         this.carpetaName = this.carpetaName.trim();
         if(this.carpetaName.length >= 1){
-            if(FolderComponent._pathToCreate !== "/")
-                this.carpetaName = FolderComponent._pathToCreate + this.carpetaName;
-            this.folder.createFolder(this.carpetaName).then(response => {
-                if(response.success){
+            let reg = new RegExp(/^[\d\D]{1,}[.][\d\D]{1,}$/gi);
+            if(!reg.exec(this.carpetaName)){
+                if(FolderComponent._pathToCreate !== "/")
+                    this.carpetaName = FolderComponent._pathToCreate + this.carpetaName;
+                this.folder.createFolder(this.carpetaName).then(response => {
+                    if(response.success){
+                        this.carpetaName = "";
+                        this.makeSnack('Carpeta creada con éxito.', 2500);
+                    }
+                    this.close();
+                }).catch(err => {
+                    this.makeSnack("No se pudo crear la carpeta, verifique el nombre.");
                     this.carpetaName = "";
-                    this.makeSnack('Carpeta creada con éxito.', 2500);
-                }
-                this.close();
-            }).catch(err => {
-                this.makeSnack("No se pudo crear la carpeta, verifique el nombre.");
-                this.carpetaName = "";
-            });
+                });
+            } else this.makeSnack("No se permiten los puntos en el nombre.");
         }
     }
     makeSnack(txt: string, t?: number): void{

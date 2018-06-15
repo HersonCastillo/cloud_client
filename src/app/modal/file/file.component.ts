@@ -31,7 +31,10 @@ export class FileComponent {
             this.notif.info('Subiendo archivo...', 'Se te notificará cuando se haya subido.');
             this.files.upload(this.file, FileComponent._pathToCreate).then(response => {
                 if(response.success) if(response.success != "no-process"){
-                    this.notif.success('¡Perfecto!', 'El archivo ' + this.file.name + " fue subido exitosamente.");
+                    this.notif.success('¡Perfecto!', 'El archivo ' + this.file.name + " fue subido exitosamente.", {
+                        timeOut: 2500,
+                        clickToClose: true
+                    });
                 }
             }).catch(() => {
                 this.makeSnack('Ocurrió un error al subir el archivo, puede que el tamaño o el nombre no sean correctos.');
