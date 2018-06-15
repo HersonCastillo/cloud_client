@@ -1,3 +1,12 @@
-<p>
-  file works!
-</p>
+<div>
+    <h2 style="margin-right: 55px;">
+        <span class="material-icons back" (click)="close()">arrow_back</span>
+        Subir un archivo
+    </h2>
+    <br>
+    <input type="file" name="file-to-upload" id="ftu" (change)="uploadChange($event.target.files)">
+    <br><br>
+    <button mat-raised-button color="primary" style="width: 100%;" (click)="upload()">
+        Subir archivo
+    </button>
+</div>

@@ -3,7 +3,8 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { 
     SimpleComponent, 
     ConfirmarComponent, 
-    FolderComponent 
+    FolderComponent, 
+    FileComponent
 } from '../modal/modal';
 import { Router } from '@angular/router';
 @Component({
@@ -54,7 +55,9 @@ export class HomeComponent implements OnInit {
         this.dialog.open(FolderComponent);
     }
     addFile(): void {
-        
+        FileComponent._pathToCreate = this.path;
+        FileComponent._close = () => this.dialog.closeAll();
+        this.dialog.open(FileComponent);
     }
     logout(): void{
         this.confirmModal('¡Un momento!', 
