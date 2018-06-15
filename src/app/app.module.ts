@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from './material.module';
 import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -40,7 +41,8 @@ const appRoutes: Routes = [
         MaterialModule,
         HttpModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        SimpleNotificationsModule.forRoot()
     ],
     providers: [],
     bootstrap: [AppComponent],
