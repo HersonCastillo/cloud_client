@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { SimpleComponent, ConfirmarComponent, FolderComponent } from '../modal/modal';
+import { 
+    SimpleComponent, 
+    ConfirmarComponent, 
+    FolderComponent 
+} from '../modal/modal';
 import { Router } from '@angular/router';
 @Component({
     selector: 'app-home',
@@ -56,17 +60,12 @@ export class HomeComponent implements OnInit {
         this.confirmModal('¡Un momento!', 
         '¿Estás seguro de que quieres cerrar sesión ahora?', () => {
             localStorage.removeItem('token');
+            localStorage.removeItem('u_info');
             this.router.navigate(['login']);
             this.dialog.closeAll();
         });
     }
-    raiz(): void{
-        this.path = "/";
-    }
-    compartidosYo(): void{
-        this.path = "/shared/card/";
-    }
-    compartidosOtros(): void{
-        this.path = "/shared/external/";
-    }
+    raiz(): void{}
+    compartidosYo(): void{}
+    compartidosOtros(): void{}
 }

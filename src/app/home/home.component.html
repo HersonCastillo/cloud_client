@@ -25,49 +25,20 @@
         </span>
     </mat-toolbar-row>
 </mat-toolbar>
-<div class="general-home">
-    <br>
-    <div class="container-fluid">
-        <mat-accordion>
-            <mat-expansion-panel [expanded]="true" (opened)="raiz()">
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        <span class="material-icons icon-label to-acc">folder</span>
-                        Mis archivos y carpetas
-                    </mat-panel-title>
-                    <mat-panel-description>
-                        Mi contenido personal.
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
+<mat-tab-group>
+    <mat-tab label="Mis archivos y carpetas">
+        <div class="container-fluid">
 
-                <!--Here-->
-            </mat-expansion-panel>
-            <mat-expansion-panel (opened)="compartidosOtros()">
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        <span class="material-icons icon-label to-acc">insert_drive_file</span>
-                        Mis archivos y carpetas compartidos por otros a mi
-                    </mat-panel-title>
-                    <mat-panel-description>
-                        Lo que otras personas me han compartido.
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
+        </div>
+    </mat-tab>
+    <mat-tab label="Archivos compartidos por otros">
+        <div class="container-fluid">
 
-                <!--Here-->
-            </mat-expansion-panel>
-            <mat-expansion-panel (opened)="compartidosYo()">
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        <span class="material-icons icon-label to-acc">folder_shared</span>
-                        Mis archivos y carpetas que he compartido yo a otros
-                    </mat-panel-title>
-                    <mat-panel-description>
-                        El contenido que he compartido a otras personas.
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
+        </div>
+    </mat-tab>
+    <mat-tab label="Archivos compartidos por mi">
+        <div class="container-fluid">
 
-                <!--Here-->
-            </mat-expansion-panel>
-        </mat-accordion>
-    </div>
-</div>
+        </div>
+    </mat-tab>
+</mat-tab-group>
