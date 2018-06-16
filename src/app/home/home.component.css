@@ -36,3 +36,8 @@ table tbody tr td.file-name:hover{
 .mini-icon{
     transform: scale(.8,.8);
 }
+.special{
+    transform: scale(.9,.9);
+    position: relative;
+    top: .5px;
+}

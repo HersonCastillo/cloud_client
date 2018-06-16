@@ -40,9 +40,12 @@ export class FileComponent {
                         clickToClose: true
                     });
                     this.update();
-                }
+                } else this.notif.warn("¡Ups!", "No se pudo subir el archivo correctamente.");
             }).catch(() => {
-                this.makeSnack('Ocurrió un error al subir el archivo, puede que el tamaño o el nombre no sean correctos.');
+                this.notif.error("¡Muy mal!", "No se puede subir este archivo :(", {
+                    timeOut: 3500,
+                    clickToClose: true
+                });
                 this.close();
             });
         } else this.makeSnack('Nada para subir.');

@@ -46,14 +46,26 @@ export class FilesService {
             } else rj(null);
         });
     }
-    public deleteOne(path: string): Promise<any>{
+    public deleteOne(path: string, isFolder: string): Promise<any>{
         return new Promise<void>((rs, rj) => {
             if(localStorage.getItem('token')){
                 let token = localStorage.getItem('token');
                 token = token.split('.')[0];
                 this.http.post(this.globals.path + "/api/delete", {
                     token: token,
-                    path: path
+                    path: path,
+                    is: isFolder
+                }).subscribe(r => rs(r.json()), err => rj(err));
+            } else rj(null);
+        });
+    }
+    public getShared(): Promise<any>{
+        return new Promise<void>((rs, rj) => {
+            if(localStorage.getItem('token')){
+                let token = localStorage.getItem('token');
+                token = token.split('.')[0];
+                this.http.post(this.globals.path + "/api/shared", {
+                    token: token
                 }).subscribe(r => rs(r.json()), err => rj(err));
             } else rj(null);
         });

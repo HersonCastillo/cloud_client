@@ -36,6 +36,7 @@ export class HomeComponent implements OnInit {
             }
         }
         this.showOf(this.path);
+        this.showShared();
     }
     private _path: string = "/";
     public set path(val: string){
@@ -80,6 +81,13 @@ export class HomeComponent implements OnInit {
     raiz(): void{
         this.path = "/";
         this.showOf(this.path);
+    }
+    showShared(): void{
+        this.files.getShared().then(response => {
+            console.log(response)
+        }).catch(() => {
+            this.makeSnack('No se pudo obtener la información de los archivos compartidos.');
+        });
     }
     showOf(path: string): void{
         this.dataSource = [];
@@ -134,14 +142,24 @@ export class HomeComponent implements OnInit {
             this.downloadPath(object.nombre);
         } else this.makeSnack('Archivo dañado, datos desconocidos.');
     }
-    deleteFile(filename: string){
+    deleteFile(filename: string, tipo: string){
         this.confirmModal("¡Un momento!", "¿Estás seguro que deseas eliminar a '" + filename + "' de forma permanente?", () => {
             let dir: string = this.path + filename;
-            this.files.deleteOne(dir).then(response => {
-                console.log(response)
+            let type: string = (tipo == 'folder') ? 'is' : 'notis';
+            this.files.deleteOne(dir, type).then(response => {
+                if(response.success){
+                    this.makeSnack(response.success);
+                    this.showOf(this.path);
+                } else this.makeSnack("No se recuperó la informacion correcta del servidor.");
+                this.dialog.closeAll();
             }).catch(() => {
                 this.makeSnack("No se pudo eliminar el objeto.", 2500);
+                this.dialog.closeAll();
             });
         });
+    }
+    refreshData(): void{
+        this.showOf(this.path);
+        this.showShared();
     }
 }
