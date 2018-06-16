@@ -60,14 +60,15 @@
                             {{element.nombre}} 
                         </td>
                         <td class="mat-cell" style="text-align: center;">
-                            <button mat-mini-fab color="accent" class="l-right">
-                                <span class="material-icons">info</span>
+                            <button mat-mini-fab color="warn" class="l-right" (click)="deleteFile(element.nombre)">
+                                <span class="material-icons mini-icon">delete_forever</span>
                             </button>
-                            <button mat-mini-fab color="primary" class="l-right">
-                                <span class="material-icons">cloud_download</span>
-                            </button>
-                            <button mat-mini-fab color="warn">
-                                <span class="material-icons">delete_forever</span>
+                            <button 
+                            mat-mini-fab 
+                            color="primary" 
+                            [disabled]="element.type === 'folder'" 
+                            (click)="downloadPath(element.nombre)">
+                                <span class="material-icons mini-icon">cloud_download</span>
                             </button>
                         </td>
                     </tr>

@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
         return this._path;
     }
     makeSnack(txt: string, t?: number): void{
-        this.snack.open(txt, null, { duration: t | 1500 });
+        this.snack.open(txt, null, { duration: t || 1500 });
     }
     simpleModal(title: string, message: string): void{
         SimpleComponent.run(title, message, () => this.dialog.closeAll());
@@ -59,11 +59,13 @@ export class HomeComponent implements OnInit {
     addFolder(): void{
         FolderComponent._pathToCreate = this.path;
         FolderComponent._close = () => this.dialog.closeAll();
+        FolderComponent._update = () => this.showOf(this.path);
         this.dialog.open(FolderComponent);
     }
     addFile(): void {
         FileComponent._pathToCreate = this.path;
         FileComponent._close = () => this.dialog.closeAll();
+        FileComponent._update = () => this.showOf(this.path);
         this.dialog.open(FileComponent);
     }
     logout(): void{
@@ -80,6 +82,7 @@ export class HomeComponent implements OnInit {
         this.showOf(this.path);
     }
     showOf(path: string): void{
+        this.dataSource = [];
         this.files.show(path).then(response => {
             if(response.data && isArray(response.data)){
                 let data: Array<any> = [];
@@ -117,9 +120,8 @@ export class HomeComponent implements OnInit {
     }
     downloadPath(filename: string): void{
         this.files.downloadRoute(this.path, filename).then(response => {
-            if(response.url){
-                window.open(response.url.replace("C:\\wamp64\\www\\", "http://localhost/"));
-            }
+            if(response.url) window.open(response.url);
+            else this.makeSnack('Dirección URL dañada.');
         }).catch(() => {
             this.makeSnack('Archivo dañado, no se puede descargar.', 3500);
         });
@@ -131,5 +133,15 @@ export class HomeComponent implements OnInit {
         } else if(object.type === "attach_file"){
             this.downloadPath(object.nombre);
         } else this.makeSnack('Archivo dañado, datos desconocidos.');
+    }
+    deleteFile(filename: string){
+        this.confirmModal("¡Un momento!", "¿Estás seguro que deseas eliminar a '" + filename + "' de forma permanente?", () => {
+            let dir: string = this.path + filename;
+            this.files.deleteOne(dir).then(response => {
+                console.log(response)
+            }).catch(() => {
+                this.makeSnack("No se pudo eliminar el objeto.", 2500);
+            });
+        });
     }
 }

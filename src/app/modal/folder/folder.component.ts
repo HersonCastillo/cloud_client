@@ -13,6 +13,7 @@ export class FolderComponent implements OnInit {
     ) { }
     ngOnInit(){}
     public static _pathToCreate: string = "/";
+    public static _update: Function;
     public carpetaName: string = "";
     public get pathToCreate(): string{
         return FolderComponent._pathToCreate;
@@ -20,6 +21,9 @@ export class FolderComponent implements OnInit {
     public static _close: Function;
     public close(){
         FolderComponent._close();
+    }
+    public update(){
+        FolderComponent._update();
     }
     dinCreate(realPath: string, newFolder): string{
         if(realPath === "/") return "/" + newFolder;
@@ -38,6 +42,7 @@ export class FolderComponent implements OnInit {
                         this.makeSnack('Carpeta creada con éxito.', 2500);
                     }
                     this.close();
+                    this.update();
                 }).catch(err => {
                     this.makeSnack("No se pudo crear la carpeta, verifique el nombre.");
                     this.carpetaName = "";

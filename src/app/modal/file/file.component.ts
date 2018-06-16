@@ -15,9 +15,13 @@ export class FileComponent {
     ){}
     public static _pathToCreate: string = "/";
     public static _close: Function;
+    public static _update: Function;
     public file: File;
     close(): void{
         FileComponent._close();
+    }
+    update(): void{
+        FileComponent._update();
     }
     uploadChange(files: any): void{
         this.file = files[0];
@@ -35,6 +39,7 @@ export class FileComponent {
                         timeOut: 2500,
                         clickToClose: true
                     });
+                    this.update();
                 }
             }).catch(() => {
                 this.makeSnack('Ocurrió un error al subir el archivo, puede que el tamaño o el nombre no sean correctos.');
