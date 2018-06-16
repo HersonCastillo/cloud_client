@@ -33,4 +33,17 @@ export class FilesService {
             } else rj(null);
         });
     }
+    public downloadRoute(path: string, filename: string): Promise<any>{
+        return new Promise<any>((rs, rj) => {
+            if(localStorage.getItem('token')){
+                let token = localStorage.getItem('token');
+                token = token.split('.')[0];
+                this.http.post(this.globals.path + "/api/download", {
+                    token: token,
+                    path: path,
+                    filename: filename
+                }).subscribe(r => rs(r.json()), err => rj(err));
+            } else rj(null);
+        });
+    }
 }

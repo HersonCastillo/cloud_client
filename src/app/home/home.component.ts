@@ -115,12 +115,21 @@ export class HomeComponent implements OnInit {
         this.path = route;
         this.showOf(route);
     }
+    downloadPath(filename: string): void{
+        this.files.downloadRoute(this.path, filename).then(response => {
+            if(response.url){
+                window.open(response.url.replace("C:\\wamp64\\www\\", "http://localhost/"));
+            }
+        }).catch(() => {
+            this.makeSnack('Archivo dañado, no se puede descargar.', 3500);
+        });
+    }
     sintantyc(object: any): void{
         if(object.type === "folder"){
             this.path += object.nombre + "/";
             this.showOf(this.path);
         } else if(object.type === "attach_file"){
-
+            this.downloadPath(object.nombre);
         } else this.makeSnack('Archivo dañado, datos desconocidos.');
     }
 }
