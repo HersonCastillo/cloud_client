@@ -1,3 +1,35 @@
-<p>
-  download works!
-</p>
+<mat-toolbar class="mat-elevation-z2" color="primary">
+    <span class="material-icons" style="margin-right: 10px;">cloud</span>
+    <b>aiCloud</b>
+    <span style="flex: 1 1 auto;"></span>
+    <button mat-button style="margin-right: 10px;">
+        Regístrate
+    </button>
+    <button mat-raised-button (click)="toLogin()">
+        Iniciar sesión
+    </button>
+</mat-toolbar>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col col-md-4"></div>
+        <div class="col col-md-4">
+            <img src="assets/img/download.png" style="max-width: 100%;">
+            <br><br><br>
+            <mat-card class="mat-elevation-z4">
+                <mat-card-header>
+                    <mat-card-title><b>Descargar archivo compartido</b></mat-card-title>
+                    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+                </mat-card-header>
+                <br>
+                <mat-card-actions>
+                    <button mat-raised-button color="primary" style="width: 100%;">
+                        <span class="material-icons" style="margin-right: 15px;">cloud_download</span>
+                        DESCARGAR ARCHIVO
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+        <div class="col col-md-4"></div>
+    </div>
+</div>

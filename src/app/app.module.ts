@@ -16,11 +16,14 @@ import { ConfirmarComponent } from './modal/confirmar/confirmar.component';
 import { FolderComponent } from './modal/folder/folder.component';
 import { FileComponent } from './modal/file/file.component';
 import { DownloadComponent } from './download/download.component';
+import { RegistrarComponent } from './registrar/registrar.component';
 
 const appRoutes: Routes = [
     { path: 'login',  component: LoginComponent },
     { path: 'home', component: HomeComponent },
     { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: 'download/:id', component: DownloadComponent},
+    { path: 'registar', component: RegistrarComponent },
     { path: '**', component: ErrorComponent }
 ];
 
@@ -34,7 +37,8 @@ const appRoutes: Routes = [
         ConfirmarComponent,
         FolderComponent,
         FileComponent,
-        DownloadComponent
+        DownloadComponent,
+        RegistrarComponent
     ],
     imports: [
         BrowserModule,
