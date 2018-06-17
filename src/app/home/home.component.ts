@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
     ){}
     public userName: string = "aiCloud";
     public dataSource: Array<any> = [];
+    public dataSharedFiles: Array<any> = [];
     ngOnInit(){
         if(localStorage.getItem('u_info')){
             try{
@@ -84,10 +85,42 @@ export class HomeComponent implements OnInit {
     }
     showShared(): void{
         this.files.getShared().then(response => {
-            console.log(response)
+            if(isArray(response)){
+                this.dataSharedFiles = response;
+            } else this.makeSnack("No se obtuvo una respuesta correcta del servidor.");
         }).catch(() => {
             this.makeSnack('No se pudo obtener la información de los archivos compartidos.');
         });
+    }
+    getURL(id: any): string{
+        let idCoded: string = btoa(id);
+        return "http://localhost:4200/download/" + idCoded;
+    }
+    quitShare(filename: string): void{
+        this.confirmModal("¡Espera!", "¿Estás seguro que deseas dejar de compartir este archivo?", () => {
+            this.files.quitShare(filename).then(response => {
+                if(response.success){
+                    this.makeSnack("Elemento quitado de la lista.");
+                    this.showShared();
+                }
+                else this.makeSnack("No se obtuvo la respuesta esperada.");
+            }).catch(() => {
+                this.makeSnack("Ocurrió un error al quitar el elemento de la lista.");
+            });
+            this.dialog.closeAll();
+        });
+    }
+    copyToClipboard(data: string): void{
+        function copiarAlPortapapeles(mime) {
+            var aux = document.createElement("input");
+            aux.setAttribute("value", mime);
+            document.body.appendChild(aux);
+            aux.select();
+            document.execCommand("copy");
+            document.body.removeChild(aux);
+        }
+        copiarAlPortapapeles(data);
+        this.makeSnack("URL copiada al portapapeles.");
     }
     showOf(path: string): void{
         this.dataSource = [];
@@ -149,7 +182,7 @@ export class HomeComponent implements OnInit {
             this.files.deleteOne(dir, type).then(response => {
                 if(response.success){
                     this.makeSnack(response.success);
-                    this.showOf(this.path);
+                    this.refreshData();
                 } else this.makeSnack("No se recuperó la informacion correcta del servidor.");
                 this.dialog.closeAll();
             }).catch(() => {
@@ -161,5 +194,19 @@ export class HomeComponent implements OnInit {
     refreshData(): void{
         this.showOf(this.path);
         this.showShared();
+    }
+    share(filename: string): void{
+        let dir = this.path + filename;
+        this.confirmModal("¡Espera!", "¿Estás seguro de que quieres compartir este archivo?", () => {
+            this.files.newshare(dir).then(response => {
+                if(response.success && response.url){
+                    this.simpleModal(response.success, response.url);
+                    if(response.code && response.code == "ok") this.showShared();
+                } else this.makeSnack("Se compartió, pero puede que algo haya salido mal.");
+            }).catch(() => {
+                this.makeSnack("No se pudo compartir este archivo.");
+            });
+            this.dialog.closeAll();
+        });
     }
 }

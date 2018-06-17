@@ -51,7 +51,7 @@ export class FilesService {
             if(localStorage.getItem('token')){
                 let token = localStorage.getItem('token');
                 token = token.split('.')[0];
-                this.http.post(this.globals.path + "/api/delete", {
+                this.http.post(this.globals.path + "/api/delete/object", {
                     token: token,
                     path: path,
                     is: isFolder
@@ -65,6 +65,30 @@ export class FilesService {
                 let token = localStorage.getItem('token');
                 token = token.split('.')[0];
                 this.http.post(this.globals.path + "/api/shared", {
+                    token: token
+                }).subscribe(r => rs(r.json()), err => rj(err));
+            } else rj(null);
+        });
+    }
+    public newshare(filename: string): Promise<any>{
+        return new Promise<void>((rs, rj) => {
+            if(localStorage.getItem('token')){
+                let token = localStorage.getItem('token');
+                token = token.split('.')[0];
+                this.http.post(this.globals.path + "/api/new/group", {
+                    filename: filename,
+                    token: token
+                }).subscribe(r => rs(r.json()), err => rj(err));
+            } else rj(null);
+        });
+    }
+    public quitShare(filename: string): Promise<any>{
+        return new Promise<void>((rs, rj) => {
+            if(localStorage.getItem('token')){
+                let token = localStorage.getItem('token');
+                token = token.split('.')[0];
+                this.http.post(this.globals.path + "/api/delete/share", {
+                    filename: filename,
                     token: token
                 }).subscribe(r => rs(r.json()), err => rj(err));
             } else rj(null);

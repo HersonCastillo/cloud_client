@@ -15,6 +15,7 @@ import { SimpleComponent } from './modal/simple/simple.component';
 import { ConfirmarComponent } from './modal/confirmar/confirmar.component';
 import { FolderComponent } from './modal/folder/folder.component';
 import { FileComponent } from './modal/file/file.component';
+import { DownloadComponent } from './download/download.component';
 
 const appRoutes: Routes = [
     { path: 'login',  component: LoginComponent },
@@ -32,7 +33,8 @@ const appRoutes: Routes = [
         SimpleComponent,
         ConfirmarComponent,
         FolderComponent,
-        FileComponent
+        FileComponent,
+        DownloadComponent
     ],
     imports: [
         BrowserModule,

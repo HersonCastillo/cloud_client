@@ -70,8 +70,16 @@
                             mat-mini-fab 
                             color="primary" 
                             [disabled]="element.type === 'folder'" 
+                            class="l-right"
                             (click)="downloadPath(element.nombre)">
                                 <span class="material-icons mini-icon">cloud_download</span>
+                            </button>
+                            <button 
+                            mat-mini-fab 
+                            color="primary" 
+                            [disabled]="element.type === 'folder'"
+                            (click)="share(element.nombre)">
+                                <span class="material-icons mini-icon">share</span>
                             </button>
                         </td>
                     </tr>
@@ -83,13 +91,17 @@
     <mat-tab label="Archivos compartidos">
         <div class="container">
             <mat-list>
-                <h3 mat-subheader>Archivos</h3>
-                <mat-list-item *ngFor="let note of notes">
-                  <span class="material-icons">note</span>
-                  <h4 mat-line>{{note.name}}</h4>
-                  <p mat-line> {{note.updated | date}} </p>
+                <h2 mat-subheader>Lista de archivos compartidos</h2>
+                <mat-list-item *ngFor="let file of dataSharedFiles">
+                  <span class="material-icons l-right btn" (click)="quitShare(file.nombre)">delete</span>
+                  <span class="material-icons btn" (click)="copyToClipboard(getURL(file.id))">link</span>
+                  <h4 mat-line><code><b>{{file.nombre}}</b></code></h4>
+                  <p mat-line> {{getURL(file.id)}} </p>
                 </mat-list-item>
-              </mat-list>
+                <mat-list-item *ngIf="dataSharedFiles.length === 0">
+                    <h2>No se encuentran elementos existentes.</h2>
+                </mat-list-item>
+            </mat-list>
         </div>
     </mat-tab>
 </mat-tab-group>
