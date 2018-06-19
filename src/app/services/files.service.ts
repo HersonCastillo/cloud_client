@@ -94,4 +94,11 @@ export class FilesService {
             } else rj(null);
         });
     }
+    public getDataDownloadFile(id: any): Promise<any>{
+        return new Promise<void>((rs, rj) => {
+            this.http.post(this.globals.path + '/api/download/one', {
+                id: id
+            }).subscribe(r => rs(r.json()), err => rj(err));
+        });
+    }
 }

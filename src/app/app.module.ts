@@ -23,7 +23,7 @@ const appRoutes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'download/:id', component: DownloadComponent},
-    { path: 'registar', component: RegistrarComponent },
+    { path: 'registrar', component: RegistrarComponent },
     { path: '**', component: ErrorComponent }
 ];
 
