@@ -47,7 +47,7 @@ const appRoutes: Routes = [
         MaterialModule,
         HttpModule,
         FormsModule,
-        ReactiveFormsModule,
+        ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
         SimpleNotificationsModule.forRoot()
     ],
     providers: [],

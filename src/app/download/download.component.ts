@@ -57,4 +57,7 @@ export class DownloadComponent implements OnInit {
     open(){
         if(this.isLoaded) window.open(this.url);
     }
+    toCreate(): void{
+        this.router.navigate(['registrar']);
+    }
 }

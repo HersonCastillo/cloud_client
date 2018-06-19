@@ -21,6 +21,9 @@ export class LoginComponent implements OnInit {
         this.snack.open(txt, null, { duration: time || 1500 });
     }
     ngOnInit(){}
+    goToCreate(): void{
+        this.router.navigate(['registrar']);
+    }
     login(): void{
         let email: string = this.userDetails.email.toString();
         let pass: string = this.userDetails.pass.toString();
