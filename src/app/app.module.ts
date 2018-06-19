@@ -5,6 +5,7 @@ import { MaterialModule } from './material.module';
 import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { AuthGuard, LoginGuard } from './auth.guard';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,11 +20,11 @@ import { DownloadComponent } from './download/download.component';
 import { RegistrarComponent } from './registrar/registrar.component';
 
 const appRoutes: Routes = [
-    { path: 'login',  component: LoginComponent },
-    { path: 'home', component: HomeComponent },
+    { path: 'login',  component: LoginComponent, canActivate: [LoginGuard] },
+    { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'download/:id', component: DownloadComponent},
-    { path: 'registrar', component: RegistrarComponent },
+    { path: 'registrar', component: RegistrarComponent, canActivate: [LoginGuard] },
     { path: '**', component: ErrorComponent }
 ];
 
