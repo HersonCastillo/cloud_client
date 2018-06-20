@@ -26,8 +26,7 @@
                     <mat-card-subtitle><code>{{infoFile.name}}</code> <b class="size">{{infoFile.size}}</b></mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-actions *ngIf="isShow">
-                    <br>
-                    <button (click)="open()" mat-raised-button color="primary" style="width: 100%;" [disabled]="!isLoaded">
+                    <button (click)="open()" mat-raised-button color="primary" style="width: 98%;" [disabled]="!isLoaded">
                         <span class="material-icons" style="margin-right: 15px;">cloud_download</span>
                         DESCARGAR ARCHIVO
                     </button>

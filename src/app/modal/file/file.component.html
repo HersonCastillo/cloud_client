@@ -4,8 +4,13 @@
         Subir un archivo
     </h2>
     <br>
+    <div>
+        <li>Escoge un archivo</li>
+        <li>Presiona <code>Subir archivo</code></li>
+        <li>Espera el mensaje de confirmación</li>
+    </div><br><br>
     <input type="file" name="file-to-upload" id="ftu" (change)="uploadChange($event.target.files)">
-    <br><br>
+    <br><br><br>
     <button mat-raised-button color="primary" style="width: 100%;" (click)="upload()">
         Subir archivo
     </button>
