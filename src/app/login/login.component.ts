@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
         email: "",
         pass: ""
     };
-    private load: boolean = false;
+    public load: boolean = false;
     makeSnack(txt: string, time?: number){
         this.snack.open(txt, null, { duration: time || 1500 });
     }

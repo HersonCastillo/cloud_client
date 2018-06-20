@@ -94,7 +94,7 @@ export class HomeComponent implements OnInit {
     }
     getURL(id: any): string{
         let idCoded: string = btoa(id);
-        return "http://localhost:4200/download/" + idCoded;
+        return "https://aidersite.com/download/" + idCoded;
     }
     quitShare(filename: string): void{
         this.confirmModal("¡Espera!", "¿Estás seguro que deseas dejar de compartir este archivo?", () => {
