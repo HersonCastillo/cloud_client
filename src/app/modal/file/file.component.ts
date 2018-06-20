@@ -40,7 +40,11 @@ export class FileComponent {
                         clickToClose: true
                     });
                     this.update();
-                } else this.notif.warn("¡Ups!", "No se pudo subir el archivo correctamente.");
+                } else if(response.error) this.notif.error("¡Ups!", response.error, {
+                    timeOut: 3500,
+                    clickToClose: true
+                }); 
+                else this.notif.warn("¡Ups!", "No se pudo subir el archivo correctamente.");
             }).catch(() => {
                 this.notif.error("¡Muy mal!", "No se puede subir este archivo :(", {
                     timeOut: 3500,

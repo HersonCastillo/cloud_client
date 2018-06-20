@@ -55,7 +55,6 @@ export class LoginComponent implements OnInit {
                 else this.makeSnack("No se encontró la respuesta esperada.");
             }).catch(err => {
                 this.makeSnack('Ocurrió un error al obtener el usuario.', 3500);
-                console.error(err);
             });
         } else this.makeSnack('Algún campo está vacío.', 2500);
     }

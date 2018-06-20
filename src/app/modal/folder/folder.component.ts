@@ -40,10 +40,11 @@ export class FolderComponent implements OnInit {
                     if(response.success){
                         this.carpetaName = "";
                         this.makeSnack('Carpeta creada con éxito.', 2500);
-                    }
+                    } else if(response.error) this.makeSnack(response.error, 2500);
+                    else this.makeSnack("Error indefinido, en un momento lo solucionaremos.");
                     this.close();
                     this.update();
-                }).catch(err => {
+                }).catch(() => {
                     this.makeSnack("No se pudo crear la carpeta, verifique el nombre.");
                     this.carpetaName = "";
                 });

@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
                 data = JSON.parse(atob(data));
                 this.userName = data.nombre + " " + data.apellido;
             }catch(ex){
-                this.userName = "aiCloud";
+                this.userName = "MyCloud";
             }
         }
         this.showOf(this.path);
@@ -75,7 +75,7 @@ export class HomeComponent implements OnInit {
         '¿Estás seguro de que quieres cerrar sesión ahora?', () => {
             localStorage.removeItem('token');
             localStorage.removeItem('u_info');
-            this.router.navigate(['login']);
+            this.router.navigate(['/']);
             this.dialog.closeAll();
         });
     }
@@ -137,10 +137,12 @@ export class HomeComponent implements OnInit {
                     });
                 });
                 this.dataSource = data;
-            }
-        }).catch(err => {
+            } else if(response.error) this.makeSnack(response.error, 2500);
+            else this.makeSnack("Error indefinido, en un momento lo solucionaremos.");
+        }).catch(() => {
             this.notify.error("¡Ups!", 'No se pueden obtener los datos.', {
-                clickToClose: true
+                clickToClose: true,
+                timeOut: 3000
             });
         });
     }
@@ -183,7 +185,8 @@ export class HomeComponent implements OnInit {
                 if(response.success){
                     this.makeSnack(response.success);
                     this.refreshData();
-                } else this.makeSnack("No se recuperó la informacion correcta del servidor.");
+                } else if(response.error) this.makeSnack(response.error, 2500);
+                else this.makeSnack("No se recuperó la informacion correcta del servidor.");
                 this.dialog.closeAll();
             }).catch(() => {
                 this.makeSnack("No se pudo eliminar el objeto.", 2500);
@@ -202,7 +205,8 @@ export class HomeComponent implements OnInit {
                 if(response.success && response.url){
                     this.simpleModal(response.success, response.url);
                     if(response.code && response.code == "ok") this.showShared();
-                } else this.makeSnack("Se compartió, pero puede que algo haya salido mal.");
+                } else if(response.error) this.makeSnack(response.error, 2500); 
+                else this.makeSnack("Se compartió, pero puede que algo haya salido mal.");
             }).catch(() => {
                 this.makeSnack("No se pudo compartir este archivo.");
             });

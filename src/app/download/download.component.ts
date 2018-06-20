@@ -38,8 +38,9 @@ export class DownloadComponent implements OnInit {
                         this.url = response.url;
                         this.infoFile.name = response.file;
                         this.infoFile.size = bytesToSize(response.size);
-                    }
-                }).catch(err => {
+                    } else if(response.error) this.makeSnack(response.error, 2500);
+                    else this.makeSnack("Error indefinido, en un momento lo solucionaremos.");
+                }).catch(() => {
                     this.makeSnack("No se pudo obtener la información del archivo.");
                     this.isShow = false;
                 });
