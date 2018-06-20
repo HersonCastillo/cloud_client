@@ -18,11 +18,12 @@ import { FolderComponent } from './modal/folder/folder.component';
 import { FileComponent } from './modal/file/file.component';
 import { DownloadComponent } from './download/download.component';
 import { RegistrarComponent } from './registrar/registrar.component';
+import { MainComponent } from './main/main.component';
 
 const appRoutes: Routes = [
     { path: 'login',  component: LoginComponent, canActivate: [LoginGuard] },
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: '', component: MainComponent },
     { path: 'download/:id', component: DownloadComponent},
     { path: 'registrar', component: RegistrarComponent, canActivate: [LoginGuard] },
     { path: '**', component: ErrorComponent }
@@ -39,7 +40,8 @@ const appRoutes: Routes = [
         FolderComponent,
         FileComponent,
         DownloadComponent,
-        RegistrarComponent
+        RegistrarComponent,
+        MainComponent
     ],
     imports: [
         BrowserModule,
