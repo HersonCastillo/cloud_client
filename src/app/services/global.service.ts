@@ -5,7 +5,8 @@ import { Http } from '@angular/http';
 })
 export class Globals {
     constructor(private http: Http) { }
-    private _path: string = "http://localhost/aidersite/api/public";
+    //private _path: string = "https://aidersite.com/cloud_api/public";
+    private _path: string = "/cloud_api/public";
     public get path(): string{
         return this._path;
     }

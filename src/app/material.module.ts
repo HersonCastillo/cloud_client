@@ -24,7 +24,8 @@ import {
   MatPaginatorModule,
   MatSelectModule,
   MatExpansionModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 
 import { LayoutModule } from '@angular/cdk/layout';
@@ -57,7 +58,8 @@ from '@angular/material/progress-bar';
     MatSelectModule,
     MatExpansionModule,
     LayoutModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatButtonModule,
@@ -81,7 +83,8 @@ from '@angular/material/progress-bar';
     MatSelectModule,
     MatExpansionModule,
     LayoutModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatProgressSpinnerModule
   ],
   declarations: []
 })

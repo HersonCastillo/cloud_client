@@ -15,6 +15,7 @@
                         type="email" 
                         matInput 
                         autocomplete="off"
+                        [disabled]="load"
                         [(ngModel)]="userDetails.email"
                         name="email">
                     <span matSuffix class="material-icons">person</span>
@@ -27,16 +28,18 @@
                         matInput 
                         autocomplete="off"
                         name="password"
+                        [disabled]="load"
                         [(ngModel)]="userDetails.pass">
                     <span matSuffix class="material-icons">security</span>
                 </mat-form-field>
                 <br><br>
-                <button mat-button color="primary" class="right-margin" (click)="goToCreate()">
+                <button mat-button [disabled]="load" color="primary" class="right-margin" (click)="goToCreate()">
                     Nueva cuenta
                 </button>
-                <button mat-raised-button color="primary" (click)="login()">
+                <button mat-raised-button [disabled]="load" color="primary" (click)="login()">
                     Iniciar sesión
                 </button>
+                <mat-spinner [diameter]="25" *ngIf="load" style="float: right; top: 8px; right: 15px;"></mat-spinner>
             </mat-card>
         </div>
         <div class="col col-md-4"></div>

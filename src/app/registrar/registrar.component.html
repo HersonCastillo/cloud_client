@@ -18,6 +18,7 @@
                         matInput 
                         placeholder="Nombre" 
                         autocomplete="off" 
+                        [disabled]="load"
                         [formControl]="nombre"
                         [(ngModel)]="data.nombre" 
                         [errorStateMatcher]="matcher">
@@ -32,6 +33,7 @@
                         matInput 
                         placeholder="Apellido" 
                         autocomplete="off" 
+                        [disabled]="load"
                         [(ngModel)]="data.apellido"
                         [errorStateMatcher]="matcher" 
                         [formControl]="apellido">
@@ -45,6 +47,7 @@
                         name="email" 
                         matInput 
                         [(ngModel)]="data.email"
+                        [disabled]="load"
                         placeholder="Correo electrónico" 
                         autocomplete="off" 
                         [errorStateMatcher]="matcher" 
@@ -63,6 +66,7 @@
                         name="ps1" 
                         matInput 
                         placeholder="Contraseña" 
+                        [disabled]="load"
                         [errorStateMatcher]="matcher" 
                         [(ngModel)]="data.password.t1"
                         [formControl]="password.test1">
@@ -77,10 +81,11 @@
                         name="ps2" 
                         matInput 
                         placeholder="Confirmar contraseña" 
+                        [disabled]="load"
                         [errorStateMatcher]="matcher" 
                         [(ngModel)]="data.password.t2"
                         [formControl]="password.test2">
-                        <mat-error *ngIf="password.test1.hasError('required')">
+                        <mat-error *ngIf="password.test2.hasError('required')">
                             La contraseña de confirmación es <strong>requerida</strong>.
                         </mat-error>
                         <span class="material-icons" matSuffix>security</span>
@@ -88,12 +93,13 @@
                     <br><br>
                     <mat-checkbox [(ngModel)]="condiciones" name="check">Acepto las condiciones de uso y privacidad.</mat-checkbox>
                     <br><br>
-                    <button mat-button color="primary" (click)="goToLogin()" style="margin-right: 3px;">
+                    <button mat-button color="primary" [disabled]="load" (click)="goToLogin()" style="margin-right: 3px;">
                         Iniciar sesión
                     </button>
-                    <button type="submit" mat-raised-button color="primary" (click)="registrar()">
+                    <button type="submit" [disabled]="load" mat-raised-button color="primary" (click)="registrar()">
                         Registrar
                     </button>
+                    <mat-spinner [diameter]="25" *ngIf="load" style="float: right; top: 8px; right: 15px;"></mat-spinner>
                 </form>
             </mat-card>
         </div>

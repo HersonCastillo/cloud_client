@@ -24,6 +24,7 @@ export class RegistrarComponent implements OnInit {
         private router: Router
     ){}
     ngOnInit(){}
+    public load: boolean = false;
     public matcher = new MyErrorStateMatcher();
     public email = new FormControl('', [Validators.required, Validators.email]);
     public nombre = new FormControl('', [Validators.required]);
@@ -69,6 +70,7 @@ export class RegistrarComponent implements OnInit {
                         inicia: fInicia,
                         final: fFinaliza
                     }
+                    this.load = true;
                     this.login.createAccount(dataToSend).then(r => {
                         if(r.success){
                             this.makeSnack(r.success);
@@ -83,9 +85,12 @@ export class RegistrarComponent implements OnInit {
                             }).catch(__err => {
                                 this.makeSnack('No se pudo obtener la información del usuario.', 2500);
                             });
-                        }
-                    }).catch(err => {
+                        } else if(r.error) this.makeSnack(r.error, 2500);
+                        else this.makeSnack("Error indefinido, lo solucionaremos lo más pronto posible.");
+                        this.load = false;
+                    }).catch(() => {
                         this.makeSnack("Ocurrió un error al crear la cuenta. Verifique los datos.");
+                        this.load = false;
                     });
                 } else this.makeSnack("Las contraseñas no son iguales.");
             } else this.makeSnack("Se tienen que aceptar las condiciones de uso.");

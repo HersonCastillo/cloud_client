@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
         email: "",
         pass: ""
     };
+    private load: boolean = false;
     makeSnack(txt: string, time?: number){
         this.snack.open(txt, null, { duration: time || 1500 });
     }
@@ -30,6 +31,7 @@ export class LoginComponent implements OnInit {
         email = email.trim();
         pass = pass.trim();
         if(email.length >= 1 && pass.length >= 1){
+            this.load = true;
             let inicia: Date = new Date();
             let final: Date = new Date();
             final.setHours(inicia.getHours() + 3);
@@ -53,8 +55,10 @@ export class LoginComponent implements OnInit {
                     this.router.navigate(['home']);
                 } else if(response.error) this.makeSnack(response.error, 2500);
                 else this.makeSnack("No se encontró la respuesta esperada.");
+                this.load = false;
             }).catch(err => {
                 this.makeSnack('Ocurrió un error al obtener el usuario.', 3500);
+                this.load = false;
             });
         } else this.makeSnack('Algún campo está vacío.', 2500);
     }
